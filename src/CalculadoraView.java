@@ -28,6 +28,12 @@ public class CalculadoraView extends JFrame implements ActionListener {
     private JButton clearButton;
     private JTextField resultado;
 
+    void soma(){
+        double n1;
+        double n2;
+        double result;
+    }
+
     public CalculadoraView() {
         setTitle("Calculadora");
         setContentPane(contentPane);
@@ -44,12 +50,11 @@ public class CalculadoraView extends JFrame implements ActionListener {
         a8Button.addActionListener(e -> resultado.setText(resultado.getText() + "8"));
         a9Button.addActionListener(e -> resultado.setText(resultado.getText() + "9"));
 
-        virgulaButton.addActionListener(e-> resultado.setText(resultado.getText() + ","));
-            String textoAtual = resultado.getText();
-            if (!textoAtual.contains(",")){
-                resultado.setText(textoAtual + ",");
-            }
+        String textoAtual = resultado.getText();
+        virgulaButton.addActionListener(e-> {if (!textoAtual.contains(",")) resultado.setText(resultado.getText() + ",");
+        });
 
+        somaButton.addActionListener(e -> resultado.setText(resultado.getText() + "+"));
         //fazer as operações matemáticas
         setVisible(true);
     }
