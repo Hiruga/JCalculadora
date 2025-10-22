@@ -66,8 +66,9 @@ public class CalculadoraView extends JFrame implements ActionListener {
 
         a0Button.addActionListener(e -> {
             if (!continuidade){
-            display.setText(display.getText() + "0");
-        }else display.setText("0");
+                display.setText(display.getText() + "0");
+        }   else display.setText("0");
+            continuidade = false;
         });
         a1Button.addActionListener(e -> {
             if (!continuidade){
@@ -134,7 +135,12 @@ public class CalculadoraView extends JFrame implements ActionListener {
                 display.setText("");
                 operador = "+";
                 esperando = true;
-            }}});
+            }}else {
+                operador = "+";
+                vazio = opera.getText();
+                vazio = vazio.substring(0, vazio.length() - 2);
+                opera.setText(vazio + "+ ");
+            }});
         subtButton.addActionListener(e -> {
             String vazio = display.getText();
             if (!vazio.isEmpty()){
@@ -146,8 +152,10 @@ public class CalculadoraView extends JFrame implements ActionListener {
                 operador = "-";
                 esperando = true;
             }}else{
-            display.setText("-");
-            operador = "-";
+                operador = "-";
+                vazio = opera.getText();
+                vazio = vazio.substring(0, vazio.length() - 2);
+                opera.setText(vazio + "- ");
             }
         });
         multButton.addActionListener(e -> {
@@ -160,18 +168,28 @@ public class CalculadoraView extends JFrame implements ActionListener {
                 display.setText("");
                 operador = "*";
                 esperando = true;
-            }}});
+            }}else{
+                operador = "*";
+                vazio = opera.getText();
+                vazio = vazio.substring(0, vazio.length() - 2);
+                opera.setText(vazio + "* ");
+            }});
         divisaoButton.addActionListener(e -> {
-            if (operador != "/") {
                 String vazio = display.getText();
                 if (!vazio.isEmpty()){
-                opera.setText("");
-                n1 = Double.parseDouble(display.getText());
-                opera.setText(display.getText()+ " / ");
-                display.setText("");
-                operador = "/";
-                esperando = true;
-        }}});
+                    if (operador != "/") {
+                        opera.setText("");
+                        n1 = Double.parseDouble(display.getText());
+                        opera.setText(display.getText()+ " / ");
+                        display.setText("");
+                        operador = "/";
+                        esperando = true;
+                }}else{
+                    operador = "/";
+                    vazio = opera.getText();
+                    vazio = vazio.substring(0, vazio.length() - 2);
+                    opera.setText(vazio + "/ ");
+                }});
 
         calcularButton.addActionListener(e ->{
             if (esperando){
